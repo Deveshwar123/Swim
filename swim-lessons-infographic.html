@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deveshwar - Water Safety Instructor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a1628;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .infographic {
+    width: 1080px;
+    background: linear-gradient(165deg, #0b1d3a 0%, #0f2847 30%, #133a5c 60%, #1a4f72 100%);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+  }
+
+  /* Water wave decoration */
+  .wave-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .wave-top svg { width: 100%; height: 100%; }
+
+  .wave-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .wave-bottom svg { width: 100%; height: 100%; }
+
+  /* Bubbles */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.08);
+    z-index: 0;
+  }
+  .b1 { width: 80px; height: 80px; top: 12%; left: 5%; }
+  .b2 { width: 50px; height: 50px; top: 30%; right: 8%; }
+  .b3 { width: 35px; height: 35px; top: 55%; left: 10%; }
+  .b4 { width: 65px; height: 65px; bottom: 25%; right: 5%; }
+  .b5 { width: 25px; height: 25px; top: 45%; left: 30%; }
+  .b6 { width: 45px; height: 45px; bottom: 35%; left: 3%; }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    padding: 50px 60px 50px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(0, 188, 212, 0.15);
+    border: 1px solid rgba(0, 188, 212, 0.4);
+    color: #4dd9e8;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .header h1 span {
+    background: linear-gradient(135deg, #00bcd4, #26c6da, #4dd0e1, #80deea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header .subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+  }
+
+  /* Icon row */
+  .swimmer-icon {
+    text-align: center;
+    margin: 10px 0 30px;
+    font-size: 60px;
+  }
+
+  /* Services */
+  .services {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .service-card {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 35px 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .service-card h3 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .service-card p {
+    color: rgba(255,255,255,0.55);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Features */
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 45px;
+    flex-wrap: wrap;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .feature-dot {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(0, 188, 212, 0.15);
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .feature span {
+    color: rgba(255,255,255,0.8);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* Credentials */
+  .credentials {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 28px 35px;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .cred-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(220,40,40,0.2), rgba(220,40,40,0.1));
+    border: 1px solid rgba(220,40,40,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cred-icon svg { width: 38px; height: 38px; }
+
+  .cred-details { flex: 1; }
+
+  .cred-details h3 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .cred-details .org {
+    color: #e05555;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .cred-meta {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+
+  .cred-meta span {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .cred-meta strong {
+    color: rgba(255,255,255,0.75);
+  }
+
+  .cred-verify {
+    background: rgba(0,188,212,0.12);
+    border: 1px solid rgba(0,188,212,0.3);
+    color: #4dd9e8;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* CTA */
+  .cta {
+    background: linear-gradient(135deg, rgba(0,188,212,0.2), rgba(0,150,180,0.15));
+    border: 1px solid rgba(0,188,212,0.3);
+    border-radius: 20px;
+    padding: 35px 40px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .cta h2 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .cta .tagline {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(0,188,212,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .contact-item .label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .contact-item .value {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 20px;
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="infographic">
+  <!-- Bubbles -->
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+  <div class="bubble b4"></div>
+  <div class="bubble b5"></div>
+  <div class="bubble b6"></div>
+
+  <!-- Top wave -->
+  <div class="wave-top">
+    <svg viewBox="0 0 1080 200" preserveAspectRatio="none">
+      <path d="M0,80 C200,150 400,20 540,80 C680,140 880,30 1080,90 L1080,0 L0,0 Z" fill="rgba(0,188,212,0.07)"/>
+      <path d="M0,100 C300,160 500,40 700,100 C900,160 1000,60 1080,110 L1080,0 L0,0 Z" fill="rgba(0,188,212,0.04)"/>
+    </svg>
+  </div>
+
+  <!-- Bottom wave -->
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1080 180" preserveAspectRatio="none">
+      <path d="M0,80 C250,20 450,140 600,80 C750,20 900,120 1080,60 L1080,180 L0,180 Z" fill="rgba(0,188,212,0.06)"/>
+      <path d="M0,120 C200,60 400,150 650,100 C900,50 1000,130 1080,90 L1080,180 L0,180 Z" fill="rgba(0,188,212,0.03)"/>
+    </svg>
+  </div>
+
+  <div class="content">
+    <!-- Header -->
+    <div class="header">
+      <div class="badge">Certified Water Safety Instructor</div>
+      <h1>Swim Lessons<br>with <span>Deveshwar</span></h1>
+      <p class="subtitle">Private & Group Lessons — Any Location You Choose</p>
+    </div>
+
+    <div class="swimmer-icon">🏊‍♂️</div>
+
+    <!-- Service Cards -->
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">🧑‍🏫</div>
+        <h3>Private Lessons</h3>
+        <p>One-on-one instruction tailored to your skill level and goals. Learn at your own pace with personalized attention.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👨‍👩‍👧‍👦</div>
+        <h3>Group Lessons</h3>
+        <p>Fun and engaging classes for families, friends, or teams. A great way to learn together in a supportive environment.</p>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature">
+        <div class="feature-dot">📍</div>
+        <span>I Come to You —<br>Any Location</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot">👶</div>
+        <span>All Ages<br>Welcome</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot">🛡️</div>
+        <span>Safety-First<br>Approach</span>
+      </div>
+      <div class="feature">
+        <div class="feature-dot">📋</div>
+        <span>Flexible<br>Scheduling</span>
+      </div>
+    </div>
+
+    <!-- Credentials -->
+    <div class="credentials">
+      <div class="cred-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4L8 10v8c0 8.5 5.1 16.4 12 18.5C26.9 34.4 32 26.5 32 18v-8L20 4z" fill="rgba(220,50,50,0.3)" stroke="#e05555" stroke-width="2"/>
+          <path d="M16 20l3 3 6-6" stroke="#e05555" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="cred-details">
+        <h3>Water Safety Instructor</h3>
+        <div class="org">American Red Cross</div>
+        <div class="cred-meta">
+          <span>Trained at: <strong>City of Plano — Tom Muehlenbeck Center</strong></span>
+          <span>Cert ID: <strong>0283KBV</strong></span>
+          <span>Valid through: <strong>03/2028</strong></span>
+        </div>
+      </div>
+      <a class="cred-verify" href="https://www.redcross.org/take-a-class/qrcode?certnumber=0283KBV" target="_blank">Verify<br>Certificate</a>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h2>Ready to Dive In?</h2>
+      <p class="tagline">Reach out to book your first lesson today</p>
+      <div class="contact-row">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="label">Call or Text</div>
+            <div class="value">(972) 654-5599</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="label">Email</div>
+            <div class="value">deveshwar.vankeswaram@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Certified Water Safety Instructor — American Red Cross</div>
+  </div>
+</div>
+
+</body>
+</html>
