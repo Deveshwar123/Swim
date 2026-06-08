@@ -3,459 +3,621 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deveshwar - Water Safety Instructor</title>
+<title>Deveshwar — Certified Swim Instructor | Private & Group Lessons</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     font-family: 'Poppins', sans-serif;
-    background: #0a1628;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    background: #060e1a;
+    color: #ffffff;
+    overflow-x: hidden;
   }
 
-  .infographic {
-    width: 1080px;
-    background: linear-gradient(165deg, #0b1d3a 0%, #0f2847 30%, #133a5c 60%, #1a4f72 100%);
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-  }
-
-  /* Water wave decoration */
-  .wave-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
+  /* ── ANIMATED WATER BG ── */
+  .page-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
     z-index: 0;
-  }
-  .wave-top svg { width: 100%; height: 100%; }
-
-  .wave-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 180px;
     overflow: hidden;
-    z-index: 0;
   }
-  .wave-bottom svg { width: 100%; height: 100%; }
-
-  /* Bubbles */
-  .bubble {
+  .page-bg .wave {
     position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), rgba(255,255,255,0.03));
-    border: 1px solid rgba(255,255,255,0.08);
-    z-index: 0;
+    width: 200%;
+    height: 200%;
+    top: -60%;
+    left: -50%;
+    border-radius: 42%;
+    opacity: 0.04;
+    animation: drift 18s linear infinite;
   }
-  .b1 { width: 80px; height: 80px; top: 12%; left: 5%; }
-  .b2 { width: 50px; height: 50px; top: 30%; right: 8%; }
-  .b3 { width: 35px; height: 35px; top: 55%; left: 10%; }
-  .b4 { width: 65px; height: 65px; bottom: 25%; right: 5%; }
-  .b5 { width: 25px; height: 25px; top: 45%; left: 30%; }
-  .b6 { width: 45px; height: 45px; bottom: 35%; left: 3%; }
+  .page-bg .wave:nth-child(1) { background: #00bcd4; animation-duration: 18s; }
+  .page-bg .wave:nth-child(2) { background: #0097a7; animation-duration: 24s; animation-delay: -4s; opacity: 0.03; }
+  .page-bg .wave:nth-child(3) { background: #4dd0e1; animation-duration: 30s; animation-delay: -8s; opacity: 0.02; }
 
-  .content {
+  @keyframes drift {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* ── LAYOUT ── */
+  .container {
     position: relative;
     z-index: 1;
-    padding: 50px 60px 50px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
   }
 
-  /* Header */
-  .header {
+  section { padding: 60px 0; }
+
+  /* ── HERO ── */
+  .hero {
     text-align: center;
-    margin-bottom: 40px;
+    padding: 80px 0 60px;
   }
 
-  .badge {
-    display: inline-block;
-    background: rgba(0, 188, 212, 0.15);
-    border: 1px solid rgba(0, 188, 212, 0.4);
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,188,212,0.1);
+    border: 1px solid rgba(0,188,212,0.3);
     color: #4dd9e8;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 8px 24px;
+    padding: 8px 20px;
     border-radius: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
   }
 
-  .header h1 {
-    font-size: 52px;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.15;
-    margin-bottom: 8px;
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.12;
+    margin-bottom: 16px;
   }
 
-  .header h1 span {
-    background: linear-gradient(135deg, #00bcd4, #26c6da, #4dd0e1, #80deea);
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, #00e5ff, #00bcd4, #26c6da);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .header .subtitle {
+  .hero .subhead {
     font-size: 18px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.55);
     font-weight: 400;
+    max-width: 560px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
   }
 
-  /* Icon row */
-  .swimmer-icon {
+  .hero-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #00bcd4, #0097a7);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 60px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(0,188,212,0.3);
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,188,212,0.45);
+  }
+
+  .hero-trust {
+    margin-top: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── SERVICES ── */
+  .section-label {
     text-align: center;
-    margin: 10px 0 30px;
-    font-size: 60px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #4dd9e8;
+    margin-bottom: 12px;
   }
 
-  /* Services */
-  .services {
-    display: flex;
-    gap: 30px;
+  .section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
     margin-bottom: 40px;
   }
 
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
   .service-card {
-    flex: 1;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
-    padding: 35px 30px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s;
+    padding: 36px 30px;
+    transition: transform 0.3s, border-color 0.3s;
   }
 
   .service-card:hover {
     transform: translateY(-4px);
+    border-color: rgba(0,188,212,0.3);
   }
 
-  .service-icon {
-    font-size: 48px;
+  .service-card .icon {
+    font-size: 40px;
     margin-bottom: 16px;
   }
 
   .service-card h3 {
-    color: #ffffff;
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 10px;
   }
 
   .service-card p {
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.5);
     font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .service-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .service-card ul li {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .service-card ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #00e5ff;
+    font-weight: 700;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    counter-reset: step;
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+  }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0,188,212,0.2), rgba(0,188,212,0.08));
+    border: 2px solid rgba(0,188,212,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #00e5ff;
+    margin: 0 auto 16px;
+  }
+
+  .step h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
     line-height: 1.6;
   }
 
-  /* Features */
-  .features {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 45px;
-    flex-wrap: wrap;
-  }
-
-  .feature {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .feature-dot {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: rgba(0, 188, 212, 0.15);
-    border: 1px solid rgba(0, 188, 212, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .feature span {
-    color: rgba(255,255,255,0.8);
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  /* Credentials */
-  .credentials {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+  /* ── CREDENTIALS ── */
+  .cred-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
-    padding: 28px 35px;
-    margin-bottom: 35px;
+    padding: 32px 36px;
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 24px;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  .cred-icon {
-    width: 70px;
-    height: 70px;
+  .cred-shield {
+    width: 64px;
+    height: 64px;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(220,40,40,0.2), rgba(220,40,40,0.1));
-    border: 1px solid rgba(220,40,40,0.3);
+    background: linear-gradient(135deg, rgba(220,50,50,0.2), rgba(220,50,50,0.08));
+    border: 1px solid rgba(220,50,50,0.25);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
 
-  .cred-icon svg { width: 38px; height: 38px; }
+  .cred-shield svg { width: 34px; height: 34px; }
 
-  .cred-details { flex: 1; }
+  .cred-info { flex: 1; }
 
-  .cred-details h3 {
-    color: #ffffff;
-    font-size: 18px;
+  .cred-info h3 {
+    font-size: 17px;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
-  .cred-details .org {
+  .cred-info .org {
     color: #e05555;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     margin-bottom: 6px;
   }
 
-  .cred-meta {
+  .cred-info .meta {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     flex-wrap: wrap;
   }
 
-  .cred-meta span {
-    color: rgba(255,255,255,0.5);
+  .cred-info .meta span {
+    color: rgba(255,255,255,0.4);
     font-size: 12px;
-    font-weight: 500;
   }
 
-  .cred-meta strong {
-    color: rgba(255,255,255,0.75);
+  .cred-info .meta strong {
+    color: rgba(255,255,255,0.7);
   }
 
-  .cred-verify {
-    background: rgba(0,188,212,0.12);
-    border: 1px solid rgba(0,188,212,0.3);
+  .cred-link {
+    background: rgba(0,188,212,0.1);
+    border: 1px solid rgba(0,188,212,0.25);
     color: #4dd9e8;
     font-size: 12px;
     font-weight: 600;
-    padding: 8px 18px;
-    border-radius: 10px;
+    padding: 10px 18px;
+    border-radius: 12px;
     text-decoration: none;
+    text-align: center;
     flex-shrink: 0;
-    text-align: center;
-    line-height: 1.4;
+    transition: background 0.2s;
   }
 
-  /* CTA */
-  .cta {
-    background: linear-gradient(135deg, rgba(0,188,212,0.2), rgba(0,150,180,0.15));
-    border: 1px solid rgba(0,188,212,0.3);
-    border-radius: 20px;
-    padding: 35px 40px;
-    text-align: center;
-    margin-bottom: 10px;
+  .cred-link:hover { background: rgba(0,188,212,0.2); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 
-  .cta h2 {
-    color: #ffffff;
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 6px;
+  .testimonial {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
   }
 
-  .cta .tagline {
-    color: rgba(255,255,255,0.5);
+  .testimonial .stars {
+    color: #ffc107;
     font-size: 14px;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .testimonial p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+
+  .testimonial .author {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .testimonial .author span {
+    color: rgba(255,255,255,0.35);
+    font-weight: 400;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 70px 0 80px;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(0,120,150,0.1));
+    border: 1px solid rgba(0,188,212,0.25);
+    border-radius: 24px;
+    padding: 50px 40px;
+  }
+
+  .cta-box h2 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .cta-box .tagline {
+    color: rgba(255,255,255,0.45);
+    font-size: 15px;
+    margin-bottom: 30px;
   }
 
   .contact-row {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 40px;
     flex-wrap: wrap;
+    margin-bottom: 28px;
   }
 
   .contact-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
 
   .contact-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: rgba(0,188,212,0.2);
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(0,188,212,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
   }
 
-  .contact-item .label {
+  .contact-item .lbl {
     font-size: 11px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
   }
 
-  .contact-item .value {
-    color: #ffffff;
+  .contact-item .val {
     font-size: 17px;
     font-weight: 600;
   }
 
-  /* Footer */
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #00bcd4, #0097a7);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 6px 25px rgba(0,188,212,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(0,188,212,0.4);
+  }
+
+  /* ── FOOTER ── */
   .footer {
     text-align: center;
-    padding-top: 20px;
-    color: rgba(255,255,255,0.25);
+    padding: 20px 0 40px;
+    color: rgba(255,255,255,0.2);
     font-size: 12px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(0,188,212,0.4), transparent);
+    margin: 0 auto 50px;
+    border-radius: 2px;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    .services { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 24px; }
+    .testimonials { grid-template-columns: 1fr; }
+    .contact-row { flex-direction: column; align-items: center; gap: 20px; }
+    .cred-card { flex-direction: column; text-align: center; }
+    .cred-info .meta { justify-content: center; }
+    .section-title { font-size: 26px; }
   }
 </style>
 </head>
 <body>
 
-<div class="infographic">
-  <!-- Bubbles -->
-  <div class="bubble b1"></div>
-  <div class="bubble b2"></div>
-  <div class="bubble b3"></div>
-  <div class="bubble b4"></div>
-  <div class="bubble b5"></div>
-  <div class="bubble b6"></div>
+<!-- Animated water background -->
+<div class="page-bg">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
 
-  <!-- Top wave -->
-  <div class="wave-top">
-    <svg viewBox="0 0 1080 200" preserveAspectRatio="none">
-      <path d="M0,80 C200,150 400,20 540,80 C680,140 880,30 1080,90 L1080,0 L0,0 Z" fill="rgba(0,188,212,0.07)"/>
-      <path d="M0,100 C300,160 500,40 700,100 C900,160 1000,60 1080,110 L1080,0 L0,0 Z" fill="rgba(0,188,212,0.04)"/>
-    </svg>
-  </div>
+<div class="container">
 
-  <!-- Bottom wave -->
-  <div class="wave-bottom">
-    <svg viewBox="0 0 1080 180" preserveAspectRatio="none">
-      <path d="M0,80 C250,20 450,140 600,80 C750,20 900,120 1080,60 L1080,180 L0,180 Z" fill="rgba(0,188,212,0.06)"/>
-      <path d="M0,120 C200,60 400,150 650,100 C900,50 1000,130 1080,90 L1080,180 L0,180 Z" fill="rgba(0,188,212,0.03)"/>
-    </svg>
-  </div>
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <div class="hero-badge">✓ American Red Cross Certified</div>
+    <h1>Your Child Becomes a<br><span class="highlight">Confident Swimmer</span></h1>
+    <p class="subhead">Certified private and group swim lessons at any pool you choose — with a personalized plan that tracks exactly the pace you're going at.</p>
+    <a href="#contact" class="hero-cta">Book a Free Consultation</a>
+    <p class="hero-trust">No commitment needed — let's talk about your goals first</p>
+  </section>
 
-  <div class="content">
-    <!-- Header -->
-    <div class="header">
-      <div class="badge">Certified Water Safety Instructor</div>
-      <h1>Swim Lessons<br>with <span>Deveshwar</span></h1>
-      <p class="subtitle">Private & Group Lessons — Any Location You Choose</p>
-    </div>
+  <!-- ════ SERVICES ════ -->
+  <section>
+    <div class="section-label">What I Offer</div>
+    <div class="section-title">Two Ways to Learn</div>
 
-    <div class="swimmer-icon">🏊‍♂️</div>
-
-    <!-- Service Cards -->
     <div class="services">
       <div class="service-card">
-        <div class="service-icon">🧑‍🏫</div>
+        <div class="icon">🧑‍🏫</div>
         <h3>Private Lessons</h3>
-        <p>One-on-one instruction tailored to your skill level and goals. Learn at your own pace with personalized attention.</p>
+        <p>One-on-one instruction built around you. Every swimmer gets a personalized progress plan so you can see exactly where you are and what's next.</p>
+        <ul>
+          <li>Custom plan tailored to your pace</li>
+          <li>Progress tracking after every session</li>
+          <li>Skill milestones you can actually see</li>
+          <li>Beginners to advanced — all levels</li>
+        </ul>
       </div>
       <div class="service-card">
-        <div class="service-icon">👨‍👩‍👧‍👦</div>
+        <div class="icon">👨‍👩‍👧‍👦</div>
         <h3>Group Lessons</h3>
-        <p>Fun and engaging classes for families, friends, or teams. A great way to learn together in a supportive environment.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📊</div>
-        <h3>Personalized Plans</h3>
-        <p>Every swimmer gets a custom progress plan that tracks exactly where you are and what's next — so you always know the pace you're going at.</p>
-      </div>
-    </div>
-
-    <!-- Features -->
-    <div class="features">
-      <div class="feature">
-        <div class="feature-dot">📍</div>
-        <span>I Come to You —<br>Any Location</span>
-      </div>
-      <div class="feature">
-        <div class="feature-dot">👶</div>
-        <span>All Ages<br>Welcome</span>
-      </div>
-      <div class="feature">
-        <div class="feature-dot">🛡️</div>
-        <span>Safety-First<br>Approach</span>
-      </div>
-      <div class="feature">
-        <div class="feature-dot">📋</div>
-        <span>Flexible<br>Scheduling</span>
+        <p>Learn alongside friends, siblings, or neighbors. Small groups keep things fun while everyone still gets personal attention.</p>
+        <ul>
+          <li>Great for families and friend groups</li>
+          <li>Supportive, social environment</li>
+          <li>Small group sizes for quality</li>
+          <li>More affordable per swimmer</li>
+        </ul>
       </div>
     </div>
+  </section>
 
-    <!-- Credentials -->
-    <div class="credentials">
-      <div class="cred-icon">
+  <!-- ════ HOW IT WORKS ════ -->
+  <section>
+    <div class="divider"></div>
+    <div class="section-label">How It Works</div>
+    <div class="section-title">Getting Started Is Easy</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Reach Out</h4>
+        <p>Call, text, or email me. We'll chat about your goals and find a time that works.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Get Your Plan</h4>
+        <p>I'll assess your skill level and create a personalized plan with clear milestones.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Start Swimming</h4>
+        <p>Lessons happen at your pool, on your schedule. Track your progress every session.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CREDENTIALS ════ -->
+  <section>
+    <div class="divider"></div>
+    <div class="section-label">Certification</div>
+    <div class="section-title">Trained & Certified</div>
+
+    <div class="cred-card">
+      <div class="cred-shield">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20 4L8 10v8c0 8.5 5.1 16.4 12 18.5C26.9 34.4 32 26.5 32 18v-8L20 4z" fill="rgba(220,50,50,0.3)" stroke="#e05555" stroke-width="2"/>
           <path d="M16 20l3 3 6-6" stroke="#e05555" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <div class="cred-details">
+      <div class="cred-info">
         <h3>Water Safety Instructor</h3>
         <div class="org">American Red Cross</div>
-        <div class="cred-meta">
+        <div class="meta">
           <span>Trained at: <strong>City of Plano — Tom Muehlenbeck Center</strong></span>
           <span>Cert ID: <strong>0283KBV</strong></span>
           <span>Valid through: <strong>03/2028</strong></span>
         </div>
       </div>
-      <a class="cred-verify" href="https://www.redcross.org/take-a-class/qrcode?certnumber=0283KBV" target="_blank">Verify<br>Certificate</a>
+      <a class="cred-link" href="https://www.redcross.org/take-a-class/qrcode?certnumber=0283KBV" target="_blank">Verify<br>Certificate</a>
     </div>
+  </section>
 
-    <!-- CTA -->
-    <div class="cta">
+  <!-- ════ TESTIMONIALS ════ -->
+  <section>
+    <div class="divider"></div>
+    <div class="section-label">What Parents Say</div>
+    <div class="section-title">Happy Swimmers</div>
+
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"My kids were scared of the water. After just a few lessons they were jumping in on their own. The progress plan really helped us see how far they've come."</p>
+        <div class="author">— Parent of 2</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Super patient and professional. He came to our pool and made my daughter feel completely safe. She's now swimming laps on her own!"</p>
+        <div class="author">— Local Mom</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"We did group lessons with our neighbors — the kids loved it and it was so convenient. Highly recommend for anyone in the DFW area."</p>
+        <div class="author">— Group Lesson Family</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CTA ════ -->
+  <section class="cta-section" id="contact">
+    <div class="cta-box">
       <h2>Ready to Dive In?</h2>
-      <p class="tagline">Reach out to book your first lesson today</p>
+      <p class="tagline">Reach out today — your first consultation is free</p>
       <div class="contact-row">
         <div class="contact-item">
           <div class="contact-icon">📞</div>
           <div>
-            <div class="label">Call or Text</div>
-            <div class="value">(972) 654-5599</div>
+            <div class="lbl">Call or Text</div>
+            <div class="val">(972) 654-5599</div>
           </div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">✉️</div>
           <div>
-            <div class="label">Email</div>
-            <div class="value">deveshwar.vankeswaram@gmail.com</div>
+            <div class="lbl">Email</div>
+            <div class="val">deveshwar.vankeswaram@gmail.com</div>
           </div>
         </div>
       </div>
+      <a href="sms:9726545599" class="cta-btn">Text Me Now</a>
     </div>
+  </section>
 
-    <div class="footer">Certified Water Safety Instructor — American Red Cross</div>
-  </div>
+  <div class="footer">© 2026 Deveshwar Vankeswaram — Certified Water Safety Instructor, American Red Cross</div>
+
 </div>
 
 </body>
