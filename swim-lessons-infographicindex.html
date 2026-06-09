@@ -524,6 +524,94 @@
     box-shadow: 0 10px 30px rgba(2,136,209,0.3);
   }
 
+  /* ── CONTACT FORM ── */
+  .contact-form {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(2,136,209,0.1);
+    border-radius: 18px;
+    padding: 36px 32px;
+    max-width: 520px;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  }
+
+  .contact-form label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #5a7a8a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(2,136,209,0.15);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1a3044;
+    background: rgba(255,255,255,0.9);
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: #0288d1;
+    box-shadow: 0 0 0 3px rgba(2,136,209,0.08);
+  }
+
+  .contact-form textarea {
+    height: 110px;
+    resize: vertical;
+  }
+
+  .contact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .form-submit {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #0288d1, #00897b);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    box-shadow: 0 6px 22px rgba(2,136,209,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(2,136,209,0.3);
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 24px;
+    color: #00897b;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .contact-form .form-row { grid-template-columns: 1fr; }
+  }
+
   .footer {
     text-align: center;
     padding: 16px 0 36px;
@@ -712,8 +800,34 @@
     </div>
   </section>
 
+  <!-- ════ CONTACT FORM ════ -->
+  <section id="contact">
+    <div class="divider"></div>
+    <div class="section-label">Get in Touch</div>
+    <div class="section-title">Send Me a Message</div>
+
+    <div class="contact-form" id="contactForm">
+      <form id="msgForm" onsubmit="sendMessage(event)">
+        <div class="form-row">
+          <div>
+            <label>Your Name</label>
+            <input type="text" id="formName" placeholder="e.g. Sarah" required>
+          </div>
+          <div>
+            <label>Phone or Email</label>
+            <input type="text" id="formContact" placeholder="How can I reach you?" required>
+          </div>
+        </div>
+        <label>Message</label>
+        <textarea id="formMsg" placeholder="Tell me about who's learning, their age, experience level, and what you're looking for!"></textarea>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+      <div class="form-success" id="formSuccess">✓ Opening your email app now — just hit send!</div>
+    </div>
+  </section>
+
   <!-- ════ CTA ════ -->
-  <section class="cta-section" id="contact">
+  <section class="cta-section">
     <div class="cta-box">
       <h2>Ready to Dive In?</h2>
       <p class="tagline">Reach out today — your first consultation is free</p>
@@ -741,5 +855,18 @@
 
 </div>
 
+<script>
+function sendMessage(e) {
+  e.preventDefault();
+  var name = document.getElementById('formName').value;
+  var contact = document.getElementById('formContact').value;
+  var msg = document.getElementById('formMsg').value;
+  var subject = encodeURIComponent('Swim Lesson Inquiry from ' + name);
+  var body = encodeURIComponent('Name: ' + name + '\nContact: ' + contact + '\n\n' + msg);
+  window.location.href = 'mailto:deveshwar.vankeswaram@gmail.com?subject=' + subject + '&body=' + body;
+  document.getElementById('msgForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
 </body>
 </html>
